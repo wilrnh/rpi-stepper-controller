@@ -1,34 +1,11 @@
-#!/usr/bin/python
-import RPIO
-import time
+#!/usr/bin/env python
+from RPIO import PWM
 
-RPIO.setup(23,RPIO.OUT)
-RPIO.setup(24,RPIO.OUT)
+PWM.setup()
+PWM.init_channel(0, 1000000)
 
-pause=1
-step_cnt=1600
-rounds=30
+PWM.add_channel_pulse(0, 17, 0, 1400)
 
-for i in range(rounds):
-  print "Round %s starts" % i
-
-  time.sleep(1.0)
-  RPIO.output(24, True)
-
-  for s in range(step_cnt):
-    print s
-    RPIO.output(23,True)
-    time.sleep(pause)
-    RPIO.output(23,False)
-    time.sleep(pause)
-
-  time.sleep(1.0)
-  RPIO.output(24, False)
-
-  for s in range(step_cnt):
-    print s
-    RPIO.output(23,True)
-    time.sleep(pause)
-    RPIO.output(23,False)
-    time.sleep(pause)
+while True:
+  pass
 
